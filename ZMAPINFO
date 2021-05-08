@@ -1,0 +1,4 @@
+gameinfo
+{
+	addeventhandlers = "DMus_Handler"
+}

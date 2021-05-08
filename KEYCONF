@@ -1,0 +1,9 @@
+addkeysection "DoomDynMus controls" DoomDynMus_KF
+
+	addmenukey "Next track group"		dmus_next
+		alias dmus_next "event dmus_next"
+	addmenukey "Previous track group"	dmus_prev
+		alias dmus_prev "event dmus_prev"
+	addmenukey "Random track group"		dmus_random
+		alias dmus_random "event dmus_random"
+	
