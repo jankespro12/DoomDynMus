@@ -86,7 +86,7 @@ class DMus_Handler : StaticEventHandler
 
 	override void WorldLoaded(WorldEvent e)
 	{
-		if(e.isSaveGame || e.isReopen) return;
+		if(e.isReopen) return;
 
 		int shuffle_behv = CVar.getCVar("dmus_shuffle_behaviour", players[consoleplayer]).getInt();
 		if(shuffle_behv == 1)
