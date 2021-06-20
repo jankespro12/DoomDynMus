@@ -39,7 +39,7 @@ class DMus_Player ui
 				}
 				else if(pstate == 1)
 				{
-					if(cis_wspace(c) && !inquote)
+					if((cis_wspace(c) && !inquote) || i == wdat.Length() - 1)
 					{
 						if(nbuf.ByteAt(0) == ch("*"))
 						{ // special character to duplicate one of track names
