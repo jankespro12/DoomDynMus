@@ -65,8 +65,10 @@ class DMus_Handler : StaticEventHandler
 		{
 			if(!m.bISMONSTER || m.health <= 0)
 				continue;
-			if(m.target && m.target is "PlayerPawn" && players[consoleplayer] == m.target.player
-				&& (m.CheckSight(m.target) || m.distance3D(m.target) <= prox_dist)){
+			if(m.target && m.target is "PlayerPawn" && players[consoleplayer] == m.target.player // target check
+				&& !m.bJUSTHIT // STRIFE AI check
+				&& (m.CheckSight(m.target) || m.distance3D(m.target) <= prox_dist)) // proximity and LoS check
+			{
 				conplr_inaction = 1; break;
 			}
 		}

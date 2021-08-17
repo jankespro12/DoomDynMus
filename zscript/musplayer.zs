@@ -41,20 +41,27 @@ class DMus_Player ui
 				{
 					if((cis_wspace(c) && !inquote) || i == wdat.Length() - 1)
 					{
-						if(nbuf.ByteAt(0) == ch("*"))
-						{ // special character to duplicate one of track names
-							int dupi = nbuf.ByteAt(1) - ch("0");
-							if(tstate == dupi){
-								console.printf("[DoomDynMus]Error: Shortcut self-reference \"*%d\" at line %u", dupi, line);
+						if(nbuf.ByteAt(0) == ch("*")) // special character to duplicate one of track names
+						{
+							if(nbuf.ByteAt(1) == ch("*")) // '**' keeps the level music
+							{
+								nbuf = "*";
 							}
-							else if(tstate < dupi){
-								console.printf("[DoomDynMus]Error: Forward shortcut to an undeclared track \"*%d\" at line %u", dupi, line);
-							}
-							else{
-								switch(dupi){
-									case 0: nbuf = mnames_normal[mnames_normal.Size()-1]; break;
-									case 1: nbuf = mnames_action[mnames_action.Size()-1]; break;
-									default: console.printf("[DoomDynMus]Error: Forward shortcut to a non-existant index \"*%d\" at line %u", dupi, line); break;
+							else
+							{
+								int dupi = nbuf.ByteAt(1) - ch("0");
+								if(tstate == dupi){
+									console.printf("[DoomDynMus]Error: Shortcut self-reference \"*%d\" at line %u", dupi, line);
+								}
+								else if(tstate < dupi){
+									console.printf("[DoomDynMus]Error: Forward shortcut to an undeclared track \"*%d\" at line %u", dupi, line);
+								}
+								else{
+									switch(dupi){
+										case 0: nbuf = mnames_normal[mnames_normal.Size()-1]; break;
+										case 1: nbuf = mnames_action[mnames_action.Size()-1]; break;
+										default: console.printf("[DoomDynMus]Error: Forward shortcut to a non-existant index \"*%d\" at line %u", dupi, line); break;
+									}
 								}
 							}
 						}
