@@ -28,6 +28,7 @@ class DMus_Player ui
 			{
 				int c = wdat.ByteAt(i);
 
+				if(c == ch("\0")) break;
 				if(c == ch("\n")) ++line;
 				if(c == ch("\"")){
 					inquote = !inquote;
