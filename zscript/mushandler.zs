@@ -61,6 +61,7 @@ class DMus_Handler : StaticEventHandler
 		Actor m;
 		int conplr_inaction = 0;
 		double prox_dist = CVar.getCVar("dmus_combat_proximity_dist", players[consoleplayer]).getFloat();
+		int min_monst = CVar.getCVar("dmus_combat_min_monsters", players[consoleplayer]).getInt();
 		while(m = Actor(it.next()))
 		{
 			if(!m.bISMONSTER || m.health <= 0)
@@ -69,7 +70,9 @@ class DMus_Handler : StaticEventHandler
 				&& !m.bJUSTHIT // STRIFE AI check
 				&& (m.CheckSight(m.target) || m.distance3D(m.target) <= prox_dist)) // proximity and LoS check
 			{
-				conplr_inaction = 1; break;
+				conplr_inaction++;
+				if(conplr_inaction >= min_monst)
+					break;
 			}
 		}
 
@@ -77,7 +80,7 @@ class DMus_Handler : StaticEventHandler
 			if(plr_combat_timers[i] > 0) plr_combat_timers[i]--;
 
 		if(players[consoleplayer].mo.health > 0){
-			if(conplr_inaction){
+			if(conplr_inaction >= min_monst){
 				QueueFade(-1, 1);
 				plr_combat_timers[consoleplayer] = CVar.getCVar("dmus_combat_fade_time", players[consoleplayer]).getInt();
 			}
