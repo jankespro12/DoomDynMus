@@ -116,8 +116,10 @@ class DMus_Player ui
 				else if(pstate == 1)
 				{
 					if((cis_wspace(c) && !inquote) || i == wdat.Length() - 1){
+						console.printf("%s", nbuf);
 						mnames_high.push(nbuf);
 						nbuf = "";
+						pstate = 0;
 					}
 					else
 						nbuf.appendCharacter(c);
