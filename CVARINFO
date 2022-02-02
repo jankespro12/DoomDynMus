@@ -3,5 +3,7 @@ user int dmus_fadeout_time = 35;
 user int dmus_shuffle_behaviour = 1;
 
 user int dmus_combat_min_monsters = 4;
+user int dmus_combat_high_min_monsters = 20;
 user int dmus_combat_fade_time = 105;
+user int dmus_combat_high_fade_time = 315;
 user float dmus_combat_proximity_dist = 256.0;

@@ -4,11 +4,13 @@ class DMus_Player ui
 	Array<String> mnames_normal;		//0
 	Array<String> mnames_action;		//1
 	Array<String> mnames_death;		//2
+	Array<String> mnames_high;		//3
 
 
 	// Loads music descriptions from DMUSDESC lumps.
 	void LoadDesc()
 	{
+		// Load regular music descriptions
 		for(int hndl = Wads.FindLump("DMUSDESC", 0, Wads.ANYNAMESPACE);
 			hndl != -1;
 			hndl = Wads.FindLump("DMUSDESC", hndl+1, Wads.ANYNAMESPACE))
@@ -85,6 +87,41 @@ class DMus_Player ui
 				}
 			}
 		}
+
+		// Load high-action music descriptions
+		for(int hndl = Wads.FindLump("DMUSHIGH", 0, Wads.ANYNAMESPACE);
+			hndl != -1;
+			hndl = Wads.FindLump("DMUSHIGH", hndl+1, Wads.ANYNAMESPACE))
+		{
+			String wdat = Wads.ReadLump(hndl);
+			String nbuf = ""; // track name buffer
+
+			int pstate = 0;	// 0 - skipping whitespaces
+					// 1 - reading a track name
+			int inquote = 0; // if the parser is currently inside a quote
+
+			for(int i = 0; i < wdat.Length(); ++i)
+			{
+				int c = wdat.ByteAt(i);
+
+				if(c == ch("\0")) break;
+				if(c == ch("\"")){
+					inquote = !inquote;
+					continue;
+				}
+
+				if(pstate == 0 && !cis_wspace(c)){
+					pstate = 1; i--;
+				}
+				else if(pstate == 1)
+				{
+					if((cis_wspace(c) && !inquote) || i == wdat.Length() - 1)
+						mnames_high.push(nbuf);
+					else
+						nbuf.appendCharacter(c);
+				}
+			}
+		}
 	}
 
 	protected int ch(String s) { return s.byteAt(0); }
@@ -150,6 +187,7 @@ class DMus_Player ui
 					case 0: S_ChangeMusic(mnames_normal[fade_tgr]); break;
 					case 1: S_ChangeMusic(mnames_action[fade_tgr]); break;
 					case 2: S_ChangeMusic(mnames_death[fade_tgr]); break;
+					case 3: S_ChangeMusic(mnames_high[random(0, mnames_high.size()-1)]); break;
 				}
 			}
 		}
@@ -164,6 +202,9 @@ class DMus_Player ui
 
 	void Fade(int track_group, int track_category)
 	{
+		if(track_category == 3 && mnames_high.size() == 0)
+			track_category = 1; // check for music packs without high-action music
+
 		if(fade_tgr != -1 || fade_tcateg != -1) return;
 
 		if(track_group == -1) track_group = cur_tgr;
@@ -178,6 +219,9 @@ class DMus_Player ui
 
 	void PlayTrack(int track_group, int track_category)
 	{
+		if(track_category == 3 && mnames_high.size() == 0)
+			track_category = 1; // check for music packs without high-action music
+
 		SoundUpdateCVar();
 		if(cur_tgr == -1) cur_tgr = random(0, mnames_normal.size()-1);
 		if(track_group == -1) track_group = cur_tgr;
@@ -189,6 +233,7 @@ class DMus_Player ui
 			case 0: S_ChangeMusic(mnames_normal[cur_tgr]); break;
 			case 1: S_ChangeMusic(mnames_action[cur_tgr]); break;
 			case 2: S_ChangeMusic(mnames_death[cur_tgr]); break;
+			case 3: S_ChangeMusic(mnames_high[random(0, mnames_high.size()-1)]); break;
 		}
 	}
 }

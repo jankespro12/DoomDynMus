@@ -58,10 +58,13 @@ class DMus_Handler : StaticEventHandler
 	override void WorldTick()
 	{
 		ThinkerIterator it = ThinkerIterator.create();
-		Actor m;
-		int conplr_inaction = 0;
 		double prox_dist = CVar.getCVar("dmus_combat_proximity_dist", players[consoleplayer]).getFloat();
 		int min_monst = CVar.getCVar("dmus_combat_min_monsters", players[consoleplayer]).getInt();
+		int high_min_monst = CVar.getCVar("dmus_combat_high_min_monsters", players[consoleplayer]).getInt();
+
+		Actor m;
+		int conplr_inaction = 0;
+		bool conplr_bossfight = false;
 		while(m = Actor(it.next()))
 		{
 			if(!m.bISMONSTER || m.health <= 0)
@@ -71,7 +74,9 @@ class DMus_Handler : StaticEventHandler
 				&& (m.CheckSight(m.target) || m.distance3D(m.target) <= prox_dist)) // proximity and LoS check
 			{
 				conplr_inaction++;
-				if(conplr_inaction >= min_monst)
+				if(m.bBOSS)
+					conplr_bossfight = true;
+				if(conplr_inaction >= high_min_monst)
 					break;
 			}
 		}
@@ -80,7 +85,11 @@ class DMus_Handler : StaticEventHandler
 			if(plr_combat_timers[i] > 0) plr_combat_timers[i]--;
 
 		if(players[consoleplayer].mo.health > 0){
-			if(conplr_inaction >= min_monst){
+			if(conplr_inaction >= high_min_monst || conplr_bossfight){
+				QueueFade(-1, 3);
+				plr_combat_timers[consoleplayer] = CVar.getCVar("dmus_combat_high_fade_time", players[consoleplayer]).getInt();
+			}
+			else if(conplr_inaction >= min_monst){
 				QueueFade(-1, 1);
 				plr_combat_timers[consoleplayer] = CVar.getCVar("dmus_combat_fade_time", players[consoleplayer]).getInt();
 			}
