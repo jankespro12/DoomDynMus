@@ -115,8 +115,10 @@ class DMus_Player ui
 				}
 				else if(pstate == 1)
 				{
-					if((cis_wspace(c) && !inquote) || i == wdat.Length() - 1)
+					if((cis_wspace(c) && !inquote) || i == wdat.Length() - 1){
 						mnames_high.push(nbuf);
+						nbuf = "";
+					}
 					else
 						nbuf.appendCharacter(c);
 				}
