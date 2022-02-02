@@ -8,6 +8,7 @@ class DMus_Handler : StaticEventHandler
 {
 	ui DMus_Player plr;
 	int plr_combat_timers[MAXPLAYERS];
+	bool prev_enabled;
 
 	DMus_Handler_Queue queue;
 	// Queue functions
@@ -34,6 +35,7 @@ class DMus_Handler : StaticEventHandler
 		queue.qaction = 0;
 		for(uint i = 0; i < MAXPLAYERS; ++i)
 			plr_combat_timers[i] = 0;
+		prev_enabled = true;
 	}
 
 	override void UITick()
@@ -43,6 +45,7 @@ class DMus_Handler : StaticEventHandler
 			plr.LoadDesc();
 			plr.SoundInit();
 		}
+
 		// Queue processing
 		switch(queue.qaction)
 		{
@@ -57,11 +60,23 @@ class DMus_Handler : StaticEventHandler
 
 	override void WorldTick()
 	{
-		ThinkerIterator it = ThinkerIterator.create();
+		bool enabled = CVar.getCVar("dmus_enabled", players[consoleplayer]).getBool();
+		if(!enabled && prev_enabled){
+			S_ChangeMusic("*");
+			prev_enabled = enabled;
+			return;
+		}
+		else if(enabled && !prev_enabled){
+			QueuePlayTrack(-1, -1);
+			return;
+		}
+		prev_enabled = enabled;
+
 		double prox_dist = CVar.getCVar("dmus_combat_proximity_dist", players[consoleplayer]).getFloat();
 		int min_monst = CVar.getCVar("dmus_combat_min_monsters", players[consoleplayer]).getInt();
 		int high_min_monst = CVar.getCVar("dmus_combat_high_min_monsters", players[consoleplayer]).getInt();
 
+		ThinkerIterator it = ThinkerIterator.create();
 		Actor m;
 		int conplr_inaction = 0;
 		bool conplr_bossfight = false;

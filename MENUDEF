@@ -14,6 +14,9 @@ OptionMenu "DoomDynMus_Options"
 	StaticText "DoomDynMus options", Purple
 	StaticText ""
 
+	Option "Dynamic music enabled", "dmus_enabled", "OnOff"
+	StaticText ""
+
 	StaticText "Sound effects:", Purple
 	StaticText "CVar: int dmus_fadein_time", Red
 	Slider "Music fade in time", "dmus_fadein_time", 0, 350, 3, 0

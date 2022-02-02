@@ -183,17 +183,22 @@ class DMus_Player ui
 			SetMusicVolume((double(timer_fade) - ticks_fadein) / ticks_fadeout);
 
 			if(timer_fade == ticks_fadein){
-				switch(fade_tcateg){
-					case 0: S_ChangeMusic(mnames_normal[fade_tgr]); break;
-					case 1: S_ChangeMusic(mnames_action[fade_tgr]); break;
-					case 2: S_ChangeMusic(mnames_death[fade_tgr]); break;
-					case 3: S_ChangeMusic(mnames_high[random(0, mnames_high.size()-1)]); break;
+				bool enabled = CVar.getCVar("dmus_enabled", players[consoleplayer]).getBool();
+				if(enabled){
+					switch(fade_tcateg){
+						case 0: S_ChangeMusic(mnames_normal[fade_tgr]); break;
+						case 1: S_ChangeMusic(mnames_action[fade_tgr]); break;
+						case 2: S_ChangeMusic(mnames_death[fade_tgr]); break;
+						case 3: S_ChangeMusic(mnames_high[random(0, mnames_high.size()-1)]); break;
+					}
 				}
 			}
 		}
 		else if(timer_fade > 0){ // fading in
 			--timer_fade;
-			SetMusicVolume((ticks_fadein - double(timer_fade)) / ticks_fadeout);
+			bool enabled = CVar.getCVar("dmus_enabled", players[consoleplayer]).getBool();
+			if(enabled)
+				SetMusicVolume((ticks_fadein - double(timer_fade)) / ticks_fadeout);
 			if(timer_fade == 0){
 				fade_tcateg = fade_tgr = -1;
 			}
@@ -229,11 +234,14 @@ class DMus_Player ui
 
 		cur_tgr = track_group;
 		cur_tcateg = track_category;
-		switch(cur_tcateg){
-			case 0: S_ChangeMusic(mnames_normal[cur_tgr]); break;
-			case 1: S_ChangeMusic(mnames_action[cur_tgr]); break;
-			case 2: S_ChangeMusic(mnames_death[cur_tgr]); break;
-			case 3: S_ChangeMusic(mnames_high[random(0, mnames_high.size()-1)]); break;
+		bool enabled = CVar.getCVar("dmus_enabled", players[consoleplayer]).getBool();
+		if(enabled){
+			switch(cur_tcateg){
+				case 0: S_ChangeMusic(mnames_normal[cur_tgr]); break;
+				case 1: S_ChangeMusic(mnames_action[cur_tgr]); break;
+				case 2: S_ChangeMusic(mnames_death[cur_tgr]); break;
+				case 3: S_ChangeMusic(mnames_high[random(0, mnames_high.size()-1)]); break;
+			}
 		}
 	}
 }
