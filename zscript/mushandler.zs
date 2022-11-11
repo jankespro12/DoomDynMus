@@ -60,6 +60,11 @@ class DMus_Handler : StaticEventHandler
 
 	override void WorldTick()
 	{
+		if(level.MapName == "TITLEMAP"){
+			S_ChangeMusic("*");
+			return;
+		}
+
 		bool enabled = CVar.getCVar("dmus_enabled", players[consoleplayer]).getBool();
 		if(!enabled && prev_enabled){
 			S_ChangeMusic("*");
