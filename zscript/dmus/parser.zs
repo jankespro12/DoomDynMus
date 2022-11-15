@@ -20,7 +20,6 @@ class DMus_Parser
 
 			++ctx.cur;
 			DMus_Array arr = ParseArray(ctx);
-			arr.Print();
 			for(uint i = 0; i < arr.size(); ++i){
 				DMus_Chunk chnk;
 				if(arr.data[i].GetType() != DMus_Object.TYPE_DICT){
@@ -182,7 +181,8 @@ class DMus_Parser
 		}
 		for(uint i = 0; i < mnames_high.size(); ++i)
 			chnk.high_action.push(mnames_high[i]);
-		chnk_arr.push(chnk);
+		if(chnk.tracks.size())
+			chnk_arr.push(chnk);
 	}
 
 	/* Object parsing functions */

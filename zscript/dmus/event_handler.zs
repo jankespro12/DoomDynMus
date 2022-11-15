@@ -24,7 +24,9 @@ class DMus_EventHandler : StaticEventHandler
 
 	override void NetworkProcess(ConsoleEvent e)
 	{
-		if(e.name == "dmus_random")
+		if(e.name == "dmus_random"){
+			plr.dont_announce_fade = true;
 			plr.RandomTrack();
+		}
 	}
 }

@@ -18,6 +18,7 @@ class DMus_Player
 	}
 
 	/* Controls */
+	bool dont_announce_fade;
 	void RandomTrack()
 	{
 		RandomChunk();
@@ -27,6 +28,11 @@ class DMus_Player
 	/* Called every WorldTick() to see if file name from current chunk changes. */
 	play void WatchFile(PlayerPawn plr)
 	{
+		if(Level.MapName == "TITLEMAP"){
+			S_ChangeMusic("*");
+			return;
+		}
+
 		if(!chnk_arr.size() || timer_fade != -1)
 			return;
 
@@ -38,15 +44,18 @@ class DMus_Player
 			&& (new_fname != fname && (new_state != _state || chnk_arr[selected_chnk].just_switched_track))){
 			chnk_arr[selected_chnk].just_switched_track = false;
 			FadeTo(new_fname, new_state);
+			if(dont_announce_fade)
+				AnnounceMusicChange(new_fname);
 		}
 	}
 
 	/* Log announcements */
-	void AnnounceMusicChange()
+	void AnnounceMusicChange(string _fname = "")
 	{
-		string _name = fname;
-		_name = fname.Mid(_name.RightIndexOf("/") + 1);
+		string _name = _fname == "" ? fname : _fname;
+		_name = _name.Mid(_name.RightIndexOf("/") + 1);
 		_name = _name.Left(_name.RightIndexOf("."));
+		console.printf("Now playing: *%s*", _name);
 	}
 
 	/* Fade In / Fade Out effect */
@@ -69,7 +78,9 @@ class DMus_Player
 			fname = to_fname;
 			_state = to_state;
 			S_ChangeMusic(fname);
-			AnnounceMusicChange();
+			if(!dont_announce_fade)
+				AnnounceMusicChange();
+			dont_announce_fade = true;
 		}
 		else{
 			timer_fade = 0;
@@ -90,7 +101,9 @@ class DMus_Player
 				fname = fade_to_fname;
 				_state = fade_to_state;
 				S_ChangeMusic(fname);
-				AnnounceMusicChange();
+				if(!dont_announce_fade)
+					AnnounceMusicChange();
+				dont_announce_fade = true;
 			}
 			++timer_fade;
 			SetMusicVolume(double(timer_fade - ticks_fadeout) / ticks_fadein);

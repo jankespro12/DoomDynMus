@@ -48,6 +48,9 @@ class DMus_Chunk
 	int combat_timer;
 	virtual play string, string SelectFile(PlayerPawn plr)
 	{
+		if(!tracks.size())
+			return "*", "*";
+
 		// Player is dead
 		if(plr.health <= 0)
 			if(tracks[cur_track].death.size())
@@ -86,7 +89,6 @@ class DMus_Chunk
 		}
 
 		if(combat_timer > 0){
-			console.printf("%d", combat_timer);
 			--combat_timer;
 			return "*", "*"; // dont change track
 		}
@@ -101,6 +103,8 @@ class DMus_Chunk
 	/* How a chunk type reads data from DMUSCHNK file */
 	virtual void Init(DMus_Dict data)
 	{
+		cur_track = 0;
+
 		DMus_Object _folder = data.Find("folder");
 		string folder;
 		if(!_folder)
