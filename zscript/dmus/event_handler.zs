@@ -1,6 +1,7 @@
 class DMus_EventHandler : StaticEventHandler
 {
 	DMus_Player plr;
+	bool plr_init;
 
 	override void OnRegister()
 	{
@@ -8,7 +9,6 @@ class DMus_EventHandler : StaticEventHandler
 		let parser = new("DMus_Parser");
 		parser.Parse(plr.chnk_arr);
 		parser.ParseLegacy(plr.chnk_arr);
-		plr.Init();
 	}
 
 	override void WorldTick()
@@ -17,6 +17,10 @@ class DMus_EventHandler : StaticEventHandler
 			if(playeringame[i])
 				break;
 		if(i < MAXPLAYERS){
+			if(!plr_init){
+				plr.Init(players[i].mo);
+				plr_init = true;
+			}
 			plr.WatchFile(players[i].mo);
 			plr.DoFade();
 		}

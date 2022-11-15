@@ -6,10 +6,14 @@ class DMus_Player
 	string fname;
 	string _state;
 
-	void Init()
+	play void Init(PlayerPawn plr)
 	{
 		timer_fade = -1;
 		RandomTrack();
+		chnk_arr[selected_chnk].UpdateCVars();
+		[fname, _state] = chnk_arr[selected_chnk].SelectFile(plr);
+		S_ChangeMusic(fname);
+		AnnounceMusicChange();
 	}
 
 	void RandomChunk()
