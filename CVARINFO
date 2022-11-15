@@ -1,6 +1,8 @@
 server int dmus_fadeout_time = 35;
 server int dmus_fadein_time = 35;
 
+server int dmus_shuffle_behaviour = 1;
+
 server int dmus_combat_cooldown = 105;
 
 server int dmus_combat_min_monsters = 2;

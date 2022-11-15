@@ -11,6 +11,12 @@ class DMus_EventHandler : StaticEventHandler
 		parser.ParseLegacy(plr.chnk_arr);
 	}
 
+	override void WorldLoaded(WorldEvent e)
+	{
+		if(!e.isSaveGame && CVar.GetCVar("dmus_shuffle_behaviour").GetInt() == 1)
+			plr.RandomTrack();
+	}
+
 	override void WorldTick()
 	{
 		uint i = 0; for(; i < MAXPLAYERS; ++i)

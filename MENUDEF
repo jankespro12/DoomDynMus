@@ -1,3 +1,9 @@
+OptionValue "DoomDynMus_TrackShuffle"
+{
+	0, "Never"
+	1, "At start of each level"
+}
+
 AddOptionMenu "OptionsMenu"
 {
 	Submenu "DoomDynMus options", "DoomDynMus_Options"
@@ -15,8 +21,10 @@ OptionMenu "DoomDynMus_Options"
 	Slider "Music fade out time", "dmus_fadeout_time", 0, 350, 3, 0
 	StaticText ""
 
-	StaticText "CVar: int dmus_combat_cooldown", Red
+	StaticText "CVar: int dmus_combat_cooldown", Grey
 	Slider "Combat/ambient track change cooldown", "dmus_combat_cooldown", 0, 165, 5, 0
+	StaticText "CVar: int dmus_shuffle_behaviour", Grey
+	Option "Music shuffle behaviour", "dmus_shuffle_behaviour", "DoomDynMus_TrackShuffle"
 	StaticText ""
 
 	StaticText "Gameplay interaction:", Purple
