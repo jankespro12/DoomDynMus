@@ -1,4 +1,4 @@
 gameinfo
 {
-	addeventhandlers = "DMus_Handler"
+	addeventhandlers = "DMus_EventHandler"
 }

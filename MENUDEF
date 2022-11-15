@@ -1,9 +1,3 @@
-OptionValue "DoomDynMus_TrackShuffle"
-{
-	0, "Never"
-	1, "At start of each level"
-}
-
 AddOptionMenu "OptionsMenu"
 {
 	Submenu "DoomDynMus options", "DoomDynMus_Options"
@@ -14,27 +8,22 @@ OptionMenu "DoomDynMus_Options"
 	StaticText "DoomDynMus options", Purple
 	StaticText ""
 
-	Option "Dynamic music enabled", "dmus_enabled", "OnOff"
+	StaticText "Sound effects:", Purple
+	StaticText "CVar: int dmus_fadein_time", Grey
+	Slider "Music fade in time", "dmus_fadein_time", 0, 350, 3, 0
+	StaticText "CVar: int dmus_fadeout_time", Grey
+	Slider "Music fade out time", "dmus_fadeout_time", 0, 350, 3, 0
 	StaticText ""
 
-	StaticText "Sound effects:", Purple
-	StaticText "CVar: int dmus_fadein_time", Red
-	Slider "Music fade in time", "dmus_fadein_time", 0, 350, 3, 0
-	StaticText "CVar: int dmus_fadeout_time", Red
-	Slider "Music fade out time", "dmus_fadeout_time", 0, 350, 3, 0
-	StaticText "CVar: int dmus_shuffle_behaviour", Red
-	Option "Music shuffle behaviour", "dmus_shuffle_behaviour", "DoomDynMus_TrackShuffle"
+	StaticText "CVar: int dmus_combat_cooldown", Red
+	Slider "Combat/ambient track change cooldown", "dmus_combat_cooldown", 0, 165, 5, 0
 	StaticText ""
 
 	StaticText "Gameplay interaction:", Purple
-	StaticText "CVar: int dmus_combat_fade_time", Red
-	Slider "Combat/ambient track change cooldown", "dmus_combat_fade_time", 0, 350, 3, 0
-	StaticText "CVar: int dmus_combat_high_fade_time", Red
-	Slider "High-action combat/ambient track change cooldown", "dmus_combat_high_fade_time", 0, 1000, 6, 0
-	StaticText "CVar: float dmus_combat_proximity_dist", Red
+	StaticText "CVar: float dmus_combat_proximity_dist", Grey
 	Slider "Combat detection monster proximity distance", "dmus_combat_proximity_dist", 0, 4096, 32, 0
-	StaticText "CVar: int dmus_combat_min_monsters", Red
+	StaticText "CVar: int dmus_combat_min_monsters", Grey
 	Slider "Combat detection minimum amount of monsters", "dmus_combat_min_monsters", 1, 32, 1, 0
-	StaticText "CVar: int dmus_combat_high_min_monsters", Red
+	StaticText "CVar: int dmus_combat_high_min_monsters", Grey
 	Slider "High-action combat detection minimum amount of monsters", "dmus_combat_high_min_monsters", 1, 32, 1, 0
 }
