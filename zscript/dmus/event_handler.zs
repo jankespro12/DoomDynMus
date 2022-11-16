@@ -13,8 +13,11 @@ class DMus_EventHandler : StaticEventHandler
 
 	override void WorldLoaded(WorldEvent e)
 	{
-		if(!e.isSaveGame && CVar.GetCVar("dmus_shuffle_behaviour").GetInt() == 1)
+		if(!e.isSaveGame && CVar.GetCVar("dmus_shuffle_behaviour").GetInt() == 1){
+			plr.dont_announce_fade = true;
+			plr.fade_instantly = true;
 			plr.RandomTrack();
+		}
 	}
 
 	override void WorldTick()
