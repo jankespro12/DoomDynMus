@@ -83,7 +83,7 @@ class DMus_Chunk
 			else
 				return high_action[random(0, high_action.size() - 1)];
 		}
-		else if(mnst_cnt >= min_mnst){
+		else if(mnst_cnt >= min_mnst || has_boss){
 			combat_timer = combat_cooldown;
 			if(tracks[cur_track]._action.size())
 				return tracks[cur_track]._action[random(0, tracks[cur_track]._action.size() - 1)], "action";
