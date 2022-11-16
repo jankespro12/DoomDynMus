@@ -23,6 +23,7 @@ class DMus_Player
 
 	/* Controls */
 	bool dont_announce_fade;
+	bool fade_instantly;
 	void RandomTrack()
 	{
 		RandomChunk();
@@ -47,9 +48,10 @@ class DMus_Player
 		if(new_state != "*"
 			&& (new_fname != fname && (new_state != _state || chnk_arr[selected_chnk].just_switched_track))){
 			chnk_arr[selected_chnk].just_switched_track = false;
-			FadeTo(new_fname, new_state);
+			FadeTo(new_fname, new_state, fade_instantly);
 			if(dont_announce_fade)
 				AnnounceMusicChange(new_fname);
+			fade_instantly = false;
 		}
 	}
 
@@ -75,10 +77,10 @@ class DMus_Player
 		ticks_fadein = CVar.GetCVar("dmus_fadein_time").GetInt();
 	}
 
-	void FadeTo(string to_fname, string to_state)
+	void FadeTo(string to_fname, string to_state, bool instant = false)
 	{
 		UpdateCVars();
-		if(ticks_fadein + ticks_fadeout <= 1){
+		if(ticks_fadein + ticks_fadeout <= 1 || instant){
 			fname = to_fname;
 			_state = to_state;
 			S_ChangeMusic(fname);

@@ -36,6 +36,7 @@ class DMus_EventHandler : StaticEventHandler
 	{
 		if(e.name == "dmus_random"){
 			plr.dont_announce_fade = true;
+			plr.fade_instantly = true;
 			plr.RandomTrack();
 		}
 	}
