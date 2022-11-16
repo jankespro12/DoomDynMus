@@ -1,3 +1,4 @@
+server bool dmus_enabled = false;
 server int dmus_fadeout_time = 35;
 server int dmus_fadein_time = 35;
 

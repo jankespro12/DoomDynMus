@@ -31,14 +31,24 @@ class DMus_Player
 	}
 
 	/* Called every WorldTick() to see if file name from current chunk changes. */
+	bool prev_enabled;
 	play void WatchFile(PlayerPawn plr)
 	{
-		if(Level.MapName == "TITLEMAP"){
+		bool enabled = CVar.GetCVar("dmus_enabled").GetBool();
+		if(Level.MapName == "TITLEMAP" || !enabled){
 			S_ChangeMusic("*");
+			prev_enabled = enabled;
 			return;
 		}
 
-		if(!chnk_arr.size() || timer_fade != -1)
+		if(!prev_enabled && enabled){
+			S_ChangeMusic(fname);
+				AnnounceMusicChange();
+		}
+
+		prev_enabled = enabled;
+
+		if((!chnk_arr.size() || timer_fade != -1))
 			return;
 
 		string new_fname;
