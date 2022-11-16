@@ -76,9 +76,12 @@ class DMus_Chunk
 		}
 
 		// Player is in combat
-		if((mnst_cnt >= min_mnst_high || has_boss) && high_action.size()){
+		if((mnst_cnt >= min_mnst_high || has_boss) && (high_action.size() || tracks[cur_track].high_action.size())){
 			combat_timer = combat_cooldown;
-			return high_action[random(0, high_action.size() - 1)];
+			if(tracks[cur_track].high_action.size())
+				return tracks[cur_track].high_action[random(0, tracks[cur_track].high_action.size() - 1)];
+			else
+				return high_action[random(0, high_action.size() - 1)];
 		}
 		else if(mnst_cnt >= min_mnst){
 			combat_timer = combat_cooldown;
@@ -172,7 +175,7 @@ class DMus_Chunk
 			DMus_Object death = data.Find("death");
 			if(death){
 				if(death.GetType() == DMus_Object.TYPE_STRING)
-					tr.death.push(String.Format("%s%s", DMus_String(death).data));
+					tr.death.push(String.Format("%s%s", folder, DMus_String(death).data));
 				else if(death.GetType() == DMus_Object.TYPE_ARRAY){
 					DMus_Array _death = DMus_Array(death);
 					for(uint j = 0; j < _death.size(); ++j)
@@ -184,6 +187,22 @@ class DMus_Chunk
 				else
 					DMus_Parser.error_noctx("death category in track is not a string nor an array");
 			}
+			DMus_Object high_action = data.Find("high_action");
+			if(high_action){
+				if(high_action.GetType() == DMus_Object.TYPE_STRING)
+					tr.high_action.push(String.Format("%s%s", folder, DMus_String(high_action).data));
+				else if(high_action.GetType() == DMus_Object.TYPE_ARRAY){
+					DMus_Array _high_action = DMus_Array(high_action);
+					for(uint j = 0; j < _high_action.size(); ++j)
+						if(_high_action.data[j].GetType() != DMus_Object.TYPE_STRING)
+							DMus_Parser.error_noctx("File name in track is not a string");
+						else
+							tr.high_action.push(String.Format("%s%s", folder, DMus_String(_high_action.data[j]).data));
+				}
+				else
+					DMus_Parser.error_noctx("high action category in track is not a string nor an array");
+			}
+
 			self.tracks.push(tr);
 		}
 
@@ -213,4 +232,5 @@ class DMus_Track
 	array<string> normal;
 	array<string> _action;
 	array<string> death;
+	array<string> high_action;
 }
