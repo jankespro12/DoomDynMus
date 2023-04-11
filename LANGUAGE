@@ -1,0 +1,26 @@
+[en default]
+
+DOOMDYNMUS_NOW_PLAYING_X_TRACK = "Now playing: *%s*";
+
+DOOMDYNMUS_TITLE = "DoomDynMus options";
+DOOMDYNMUS_SOUNDEFFECT = "Sound effects:";
+DOOMDYNMUS_MOD_ENABLE = "DoomDynMus enabled";
+DOOMDYNMUS_MOD_ENABLE_TIP = "CVar: bool dmus_enabled";
+DOOMDYNMUS_MUSIC_FADE_IN = "Music fade in time";
+DOOMDYNMUS_MUSIC_FADE_IN_TIP = "CVar: int dmus_fadein_time";
+DOOMDYNMUS_MUSIC_FADE_OUT = "Music fade out time";
+DOOMDYNMUS_MUSIC_FADE_OUT_TIP = "CVar: int dmus_fadeout_time";
+DOOMDYNMUS_MUSIC_CHANGE_COOLDOWN = "Combat/ambient track change cooldown";
+DOOMDYNMUS_MUSIC_CHANGE_COOLDOWN_TIP = "CVar: int dmus_combat_cooldown";
+DOOMDYNMUS_MUSIC_SHUFFLE_VAL = "Music shuffle behaviour";
+DOOMDYNMUS_MUSIC_SHUFFLE_VAL_TIP = "CVar: int dmus_shuffle_behaviour";
+DOOMDYNMUS_GAMEPLAY_INTERACT = "Gameplay interaction:";
+DOOMDYNMUS_COMBAT_MUSIC_DISTANCE = "Combat detection monster proximity distance";
+DOOMDYNMUS_COMBAT_MUSIC_DISTANCE_TIP = "CVar: float dmus_combat_proximity_dist";
+DOOMDYNMUS_COMBAT_MUSIC_MIN_MONSTERS = "Combat detection minimum amount of monsters";
+DOOMDYNMUS_COMBAT_MUSIC_MIN_MONSTERS_TIP = "CVar: int dmus_combat_min_monsters";
+DOOMDYNMUS_ACTION_COMBAT_MUSIC = "High-action combat detection minimum amount of monsters";
+DOOMDYNMUS_ACTION_COMBAT_MUSIC_TIP = "CVar: int dmus_combat_high_min_monsters";
+
+OPTVAL_SHUFFLE_NEVER = "Never";
+OPTVAL_SHUFFLE_AT_START = "At start of each level";
