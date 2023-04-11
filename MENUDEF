@@ -1,39 +1,39 @@
 OptionValue "DoomDynMus_TrackShuffle"
 {
-	0, "Never"
-	1, "At start of each level"
+	0, "$OPTVAL_SHUFFLE_NEVER"
+	1, "$OPTVAL_SHUFFLE_AT_START"
 }
 
 AddOptionMenu "OptionsMenu"
 {
-	Submenu "DoomDynMus options", "DoomDynMus_Options"
+	Submenu "$DOOMDYNMUS_TITLE", "DoomDynMus_Options"
 }
 
 OptionMenu "DoomDynMus_Options"
 {
-	StaticText "DoomDynMus options", Purple
+	StaticText "$DOOMDYNMUS_TITLE", Purple
 	StaticText ""
 
-	StaticText "Sound effects:", Purple
-	StaticText "CVar: bool dmus_enabled", Grey
-	Option "DoomDynMus enabled", "dmus_enabled", "OnOff"
-	StaticText "CVar: int dmus_fadein_time", Grey
-	Slider "Music fade in time", "dmus_fadein_time", 0, 350, 3, 0
-	StaticText "CVar: int dmus_fadeout_time", Grey
-	Slider "Music fade out time", "dmus_fadeout_time", 0, 350, 3, 0
+	StaticText "$DOOMDYNMUS_SOUNDEFFECT", Purple
+	StaticText "$DOOMDYNMUS_MOD_ENABLE_TIP", Grey
+	Option "$DOOMDYNMUS_MOD_ENABLE", "dmus_enabled", "OnOff"
+	StaticText "$DOOMDYNMUS_MUSIC_FADE_IN_TIP", Grey
+	Slider "$DOOMDYNMUS_MUSIC_FADE_IN", "dmus_fadein_time", 0, 350, 3, 0
+	StaticText "$DOOMDYNMUS_MUSIC_FADE_OUT_TIP", Grey
+	Slider "$DOOMDYNMUS_MUSIC_FADE_OUT", "dmus_fadeout_time", 0, 350, 3, 0
 	StaticText ""
 
-	StaticText "CVar: int dmus_combat_cooldown", Grey
-	Slider "Combat/ambient track change cooldown", "dmus_combat_cooldown", 0, 165, 5, 0
-	StaticText "CVar: int dmus_shuffle_behaviour", Grey
-	Option "Music shuffle behaviour", "dmus_shuffle_behaviour", "DoomDynMus_TrackShuffle"
+	StaticText "$DOOMDYNMUS_MUSIC_CHANGE_COOLDOWN_TIP", Grey
+	Slider "$DOOMDYNMUS_MUSIC_CHANGE_COOLDOWN", "dmus_combat_cooldown", 0, 165, 5, 0
+	StaticText "$DOOMDYNMUS_MUSIC_SHUFFLE_VAL_TIP", Grey
+	Option "$DOOMDYNMUS_MUSIC_SHUFFLE_VAL", "dmus_shuffle_behaviour", "DoomDynMus_TrackShuffle"
 	StaticText ""
 
-	StaticText "Gameplay interaction:", Purple
-	StaticText "CVar: float dmus_combat_proximity_dist", Grey
-	Slider "Combat detection monster proximity distance", "dmus_combat_proximity_dist", 0, 4096, 32, 0
-	StaticText "CVar: int dmus_combat_min_monsters", Grey
-	Slider "Combat detection minimum amount of monsters", "dmus_combat_min_monsters", 1, 32, 1, 0
-	StaticText "CVar: int dmus_combat_high_min_monsters", Grey
-	Slider "High-action combat detection minimum amount of monsters", "dmus_combat_high_min_monsters", 1, 32, 1, 0
+	StaticText "$DOOMDYNMUS_GAMEPLAY_INTERACT", Purple
+	StaticText "$DOOMDYNMUS_COMBAT_MUSIC_DISTANCE_TIP", Grey
+	Slider "$DOOMDYNMUS_COMBAT_MUSIC_DISTANCE", "dmus_combat_proximity_dist", 0, 4096, 32, 0
+	StaticText "$DOOMDYNMUS_COMBAT_MUSIC_MIN_MONSTERS_TIP", Grey
+	Slider "$DOOMDYNMUS_COMBAT_MUSIC_MIN_MONSTERS", "dmus_combat_min_monsters", 1, 32, 1, 0
+	StaticText "$DOOMDYNMUS_ACTION_COMBAT_MUSIC_TIP", Grey
+	Slider "$DOOMDYNMUS_ACTION_COMBAT_MUSIC", "dmus_combat_high_min_monsters", 1, 32, 1, 0
 }
