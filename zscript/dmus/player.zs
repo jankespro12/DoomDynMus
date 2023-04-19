@@ -12,13 +12,20 @@ class DMus_Player
 		RandomTrack();
 		chnk_arr[selected_chnk].UpdateCVars();
 		[fname, _state] = chnk_arr[selected_chnk].SelectFile(plr);
-		S_ChangeMusic(fname);
-		AnnounceMusicChange();
+		prev_enabled = true;
 	}
 
 	void RandomChunk()
 	{
 		selected_chnk = random(0, chnk_arr.size() - 1);
+	}
+
+	void ChangeMusic(string fname)
+	{
+		if(fname.Mid(fname.RightIndexOf("/") + 1) == "silent")
+			S_ChangeMusic("music/dmus/silence.mp3");
+		else
+			S_ChangeMusic(fname);
 	}
 
 	/* Controls */
@@ -36,20 +43,18 @@ class DMus_Player
 	{
 		bool enabled = CVar.GetCVar("dmus_enabled").GetBool();
 		if(Level.MapName == "TITLEMAP" || !enabled){
-			S_ChangeMusic("*");
+			ChangeMusic("*");
 			prev_enabled = enabled;
 			return;
 		}
 
-		if(!prev_enabled && enabled){
-			S_ChangeMusic(fname);
-				AnnounceMusicChange();
-		}
+		if(!prev_enabled && enabled)
+			ChangeMusic(fname);
 
-		prev_enabled = enabled;
-
-		if((!chnk_arr.size() || timer_fade != -1))
+		if((!chnk_arr.size() || timer_fade != -1)){
+			prev_enabled = enabled; // A real pain in the ass. Music would get announced twice when mod was switched from OFF to ON and state changed as well.
 			return;
+		}
 
 		string new_fname;
 		string new_state;
@@ -63,6 +68,9 @@ class DMus_Player
 				AnnounceMusicChange(new_fname);
 			fade_instantly = false;
 		}
+		else if(!prev_enabled && enabled)
+			AnnounceMusicChange();
+		prev_enabled = enabled;
 	}
 
 	/* Log announcements */
@@ -70,8 +78,10 @@ class DMus_Player
 	{
 		string _name = _fname == "" ? fname : _fname;
 		_name = _name.Mid(_name.RightIndexOf("/") + 1);
-		_name = _name.Left(_name.RightIndexOf("."));
-		console.printf(Stringtable.Localize("$DOOMDYNMUS_NOW_PLAYING_X_TRACK"), _name);
+		if(_name != "silent"){
+			_name = _name.Left(_name.RightIndexOf("."));
+			console.printf(Stringtable.Localize("$DOOMDYNMUS_NOW_PLAYING_X_TRACK"), _name);
+		}
 	}
 
 	/* Fade In / Fade Out effect */
@@ -93,7 +103,7 @@ class DMus_Player
 		if(ticks_fadein + ticks_fadeout <= 1 || instant){
 			fname = to_fname;
 			_state = to_state;
-			S_ChangeMusic(fname);
+			ChangeMusic(fname);
 			if(!dont_announce_fade)
 				AnnounceMusicChange();
 			dont_announce_fade = true;
@@ -116,7 +126,7 @@ class DMus_Player
 			if(timer_fade == ticks_fadeout){
 				fname = fade_to_fname;
 				_state = fade_to_state;
-				S_ChangeMusic(fname);
+				ChangeMusic(fname);
 				if(!dont_announce_fade)
 					AnnounceMusicChange();
 				dont_announce_fade = true;
