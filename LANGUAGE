@@ -24,3 +24,30 @@ DOOMDYNMUS_ACTION_COMBAT_MUSIC_TIP = "CVar: int dmus_combat_high_min_monsters";
 
 OPTVAL_SHUFFLE_NEVER = "Never";
 OPTVAL_SHUFFLE_AT_START = "At start of each level";
+
+[ru]
+
+DOOMDYNMUS_NOW_PLAYING_X_TRACK = "Сейчас играет: *%s*";
+
+DOOMDYNMUS_TITLE = "Настройки DoomDynMus";
+DOOMDYNMUS_SOUNDEFFECT = "Звуковые эффекты:";
+DOOMDYNMUS_MOD_ENABLE = "Включить динамическую музыку";
+DOOMDYNMUS_MOD_ENABLE_TIP = "Переменная: bool dmus_enabled";
+DOOMDYNMUS_MUSIC_FADE_IN = "Время появления музыки";
+DOOMDYNMUS_MUSIC_FADE_IN_TIP = "Переменная: int dmus_fadein_time";
+DOOMDYNMUS_MUSIC_FADE_OUT = "Время увядания музыки";
+DOOMDYNMUS_MUSIC_FADE_OUT_TIP = "Переменная: int dmus_fadeout_time";
+DOOMDYNMUS_MUSIC_CHANGE_COOLDOWN = "Время между изменением трека боевого/окружения";
+DOOMDYNMUS_MUSIC_CHANGE_COOLDOWN_TIP = "Переменная: int dmus_combat_cooldown";
+DOOMDYNMUS_MUSIC_SHUFFLE_VAL = "Поведение перемешивания музыки";
+DOOMDYNMUS_MUSIC_SHUFFLE_VAL_TIP = "Переменная: int dmus_shuffle_behaviour";
+DOOMDYNMUS_GAMEPLAY_INTERACT = "Игровое взаимодействие:";
+DOOMDYNMUS_COMBAT_MUSIC_DISTANCE = "Расстояние до монстра для переключения на боевую музыку";
+DOOMDYNMUS_COMBAT_MUSIC_DISTANCE_TIP = "Переменная: float dmus_combat_proximity_dist";
+DOOMDYNMUS_COMBAT_MUSIC_MIN_MONSTERS = "Минимальное количество монстров для переключения на боевую музыку";
+DOOMDYNMUS_COMBAT_MUSIC_MIN_MONSTERS_TIP = "Переменная: int dmus_combat_min_monsters";
+DOOMDYNMUS_ACTION_COMBAT_MUSIC = "Минимальное количество монстров для переключения на музыку резни";
+DOOMDYNMUS_ACTION_COMBAT_MUSIC_TIP = "Переменная: int dmus_combat_high_min_monsters";
+
+OPTVAL_SHUFFLE_NEVER = "Никогда";
+OPTVAL_SHUFFLE_AT_START = "В начале каждого уровня";
