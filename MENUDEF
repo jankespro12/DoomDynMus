@@ -1,7 +1,7 @@
 OptionValue "DoomDynMus_TrackShuffle"
 {
-	0, "$OPTVAL_SHUFFLE_NEVER"
-	1, "$OPTVAL_SHUFFLE_AT_START"
+	0, "$OPTVAL_DOOMDYNMUS_SHUFFLE_NEVER"
+	1, "$OPTVAL_DOOMDYNMUS_SHUFFLE_AT_START"
 }
 
 AddOptionMenu "OptionsMenu"

@@ -22,8 +22,11 @@ DOOMDYNMUS_COMBAT_MUSIC_MIN_MONSTERS_TIP = "CVar: int dmus_combat_min_monsters";
 DOOMDYNMUS_ACTION_COMBAT_MUSIC = "High-action combat detection minimum amount of monsters";
 DOOMDYNMUS_ACTION_COMBAT_MUSIC_TIP = "CVar: int dmus_combat_high_min_monsters";
 
-OPTVAL_SHUFFLE_NEVER = "Never";
-OPTVAL_SHUFFLE_AT_START = "At start of each level";
+CNTRLMMU_DOOMDYNMUS_TITLE = "DoomDynMus controls";
+CNTRLMMU_DOOMDYNMUS_RANDOM_TRACK_SET = "Random track group";
+
+OPTVAL_DOOMDYNMUS_SHUFFLE_NEVER = "Never";
+OPTVAL_DOOMDYNMUS_SHUFFLE_AT_START = "At start of each level";
 
 [ru]
 
@@ -49,5 +52,8 @@ DOOMDYNMUS_COMBAT_MUSIC_MIN_MONSTERS_TIP = "Переменная: int dmus_comba
 DOOMDYNMUS_ACTION_COMBAT_MUSIC = "Минимальное количество монстров для переключения на музыку резни";
 DOOMDYNMUS_ACTION_COMBAT_MUSIC_TIP = "Переменная: int dmus_combat_high_min_monsters";
 
-OPTVAL_SHUFFLE_NEVER = "Никогда";
-OPTVAL_SHUFFLE_AT_START = "В начале каждого уровня";
+CNTRLMMU_DOOMDYNMUS_TITLE = "Управление DoomDynMus";
+CNTRLMMU_DOOMDYNMUS_RANDOM_TRACK_SET = "Случайная группа треков";
+
+OPTVAL_DOOMDYNMUS_SHUFFLE_NEVER = "Никогда";
+OPTVAL_DOOMDYNMUS_SHUFFLE_AT_START = "В начале каждого уровня";
