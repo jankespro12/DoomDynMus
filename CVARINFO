@@ -1,6 +1,11 @@
-user int dmus_fadein_time = 35;
-user int dmus_fadeout_time = 35;
-user int dmus_shuffle_behaviour = 1;
+server bool dmus_enabled = false;
+server int dmus_fadeout_time = 35;
+server int dmus_fadein_time = 35;
 
-user int dmus_combat_fade_time = 105;
-user float dmus_combat_proximity_dist = 256.0;
+server int dmus_shuffle_behaviour = 1;
+
+server int dmus_combat_cooldown = 105;
+
+server int dmus_combat_min_monsters = 2;
+server int dmus_combat_high_min_monsters = 20;
+server float dmus_combat_proximity_dist = 256;
